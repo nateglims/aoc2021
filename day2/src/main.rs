@@ -1,32 +1,14 @@
-use std::fs::File;
-use std::io::{self, BufRead};
-use std::path::Path;
+use aoc::load_input;
 
-fn main() -> std::io::Result<()> {
-    let input_file = std::env::args().nth(1).expect("no input given");
-    let input_path = Path::new(&input_file);
-
+fn main() {
     let mut dc = DiveCalculator::new();
 
-    for l in read_lines(input_path)?
-        .map(|s| s.unwrap())
-        .filter(|s| !s.is_empty())
-    {
+    for l in load_input() {
         dc.process_move(l)
     }
 
     // Set inc to 1 for first part.
     println!("Dive Calculation: {}", dc.position());
-
-    Ok(())
-}
-
-fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
-where
-    P: AsRef<Path>,
-{
-    let file = File::open(filename)?;
-    Ok(io::BufReader::new(file).lines())
 }
 
 struct DiveCalculator {
