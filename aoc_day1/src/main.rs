@@ -7,11 +7,12 @@ fn main() -> std::io::Result<()> {
     let input_path = Path::new(&input_file);
 
     let lines = read_lines(input_path)?
-    .map(|s| s.unwrap())
-    .filter(|s| !s.is_empty())
-    .map(|s| s.parse::<i64>().unwrap())
-    .collect();
+        .map(|s| s.unwrap())
+        .filter(|s| !s.is_empty())
+        .map(|s| s.parse::<i64>().unwrap())
+        .collect();
 
+    // Set inc to 1 for first part.
     println!("Depth: {}", inc_cnt(lines, 3));
 
     Ok(())
